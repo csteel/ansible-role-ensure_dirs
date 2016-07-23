@@ -23,10 +23,10 @@ galaxy_info:
 
     - trusty
 
-galaxy_tags:
+  galaxy_tags:
 
-  - administration
+    - administration
 
-  - system
+    - system
 
 dependencies: []
