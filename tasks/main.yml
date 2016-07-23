@@ -1,0 +1,37 @@
+---
+# file: roles/ensure_dirs/tasks/main.yml
+
+## References
+
+# * [jinja2 filters in ansible playbook filters](http://docs.ansible.com/ansible/playbooks_filters.html)
+
+# * [ansible playbook delegation](http://docs.ansible.com/ansible/playbooks_delegation.html#local-playbooks)
+
+
+## tasks
+
+# Ensure for remote directories on our target host(s)
+
+- name: ensure for remote directories
+  file:
+    state   : '{{ item.value.state   | default("directory") }}'
+    path    : '{{ item.value.path    | default(mandatory) }}'
+    owner   : '{{ item.value.owner   | default(omit) }}'
+    group   : '{{ item.value.group   | default(omit) }}'
+    mode    : '{{ item.value.mode    | default(omit) }}'
+    recurse : '{{ item.value.recurse | default(omit) }}'
+  with_dict: ensure_dirs_on_remote
+
+
+# Ensure for local directories on our Ansible controller
+
+- name: ensure for local directories
+  delegate_to: 127.0.0.1
+  file:
+    state   : '{{ item.value.state   | default("directory") }}'
+    path    : '{{ item.value.path    | default(mandatory) }}'
+    owner   : '{{ item.value.owner   | default(omit) }}'
+    group   : '{{ item.value.group   | default(omit) }}'
+    mode    : '{{ item.value.mode    | default(omit) }}'
+    recurse : '{{ item.value.recurse | default(omit) }}'
+  with_dict: ensure_dirs_on_local
