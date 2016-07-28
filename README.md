@@ -1,6 +1,7 @@
 ensure_dirs
 ===========
 
+
 The **ensure_dirs** role is used as a dependancy to ensure for the creation or removal of directories on the local and/or remote system(s). The role also allows for setting the directory(ies) owner(s), group(s) and permissions and can be used to recursivly ensure permissions.
 
 Usage Notes
