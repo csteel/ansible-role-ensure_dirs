@@ -64,15 +64,6 @@ In the dependant roles meta/main.yml we add our dependency(ies) and pass the Pyt
 
 Note: In this example we have moved the dependencies variable to the top of the roles meta/main.yml file so that it is readily noticed.
 
-    ---
-    # file: roles/dependant_role/meta/main.yml in dependant role
-    dependencies:
-
-    - { role: ensure_dirs, 
-            ensure_dirs_on_remote: "{{ another_roles_remote_directories_description }}",
-            ensure_dirs_on_local : "{{ another_roles_local_directories_description }}"
-      }
-    # other meta/main.yml content would follow...
 
 ### roles/dependant_role/defaults/main.yml example
 
@@ -129,6 +120,7 @@ Under most circumstance this role does not require it's own playbook.
 
 License
 -------
+
 MIT
 
 Author Information
