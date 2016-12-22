@@ -3,18 +3,30 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to mcin.ensure_dirs's documentation!
-============================================
+Ansible Role mcin.ensure_dirs
+=============================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   readme
+   scripts/create-playbook
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
+
+
+.. _ensure_dirs scripts:
+
+
+
+..
+ Local Variables:
+ mode: rst
+ ispell-local-dictionary: "american"
+ End:

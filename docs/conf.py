@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'mcin.ensure_dirs'
-copyright = u'2016, Christopher Steel'
+project = u'ensure_dirs'
+copyright = u'The MIT License (MIT) Copyright (c) 2016 Christopher Steel'
 author = u'Christopher Steel'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -155,3 +155,10 @@ texinfo_documents = [
 
 
 
+from recommonmark.parser import CommonMarkParser
+
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+
+source_suffix = ['.rst', '.md']
