@@ -12,6 +12,19 @@
 
 # Ensure for remote directories on our target host(s)
 
+#- local_action: command ansible --version
+#  register: version
+
+- debug: var=ansible_version.major
+
+- name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
+  debug: var='{{ ansible_ssh_user }}'
+  when: ansible_version.major < 2
+
+- name: "get value for {{ ansible_user }} ansible 2.0 >"
+  debug: var='{{ ansible_user }}'
+  when: ansible_user is defined and ansible_version.major == 2 or ansible_version.major > 2
+
 - name: ensure for remote directories
   file:
     state   : '{{ item.value.state   | default("directory") }}'
