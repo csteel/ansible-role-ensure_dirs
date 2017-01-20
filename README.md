@@ -117,6 +117,49 @@ directories we want on the local system where Ansible is being run.
         group       : "{{ ansible_ssh_user }}"
         mode        : "0644"
 
+Realworld Example
+-----------------
+
+### roles/shorewall/meta/main.yml
+
+---
+# file: roles/shorewall/meta/main.yml
+dependencies:
+  - { role: ensure_dirs, 
+        ensure_dirs_on_remote: "{{ shorewall_ensure_dirs_on_remote }}",
+        ensure_dirs_on_local : "{{ shorewall_ensure_dirs_on_local }}"
+    }
+```
+
+### roles/shorewall/defaults/main.yml
+
+```yaml
+---
+# file: roles/shorewall/defaults/main.yml
+
+shorewall_ensure_dirs_on_remote:
+
+  home_user_sys_sw_rpms:
+
+    state          : "directory"
+    path           : "/home/ansible/sys/sw/rpms/shorewall"
+    owner          : '{{ shorewall_deployment_user_name }}'
+    group          : '{{ shorewall_deployment_user_name }}'
+    mode           : '0755'
+
+# this could be called `shorewall_ensure_dirs_on_local_all_os`
+
+shorewall_ensure_dirs_on_local:
+
+  ace_fetched_files_dir:
+
+    state       : "directory"
+    path        : "../ace_fetched_files"
+    owner       : '{{ shorewall_controller_user_name }}'
+    group       : '{{ shorewall_controller_user_name }}'
+    mode        : '0755'
+```
+
 Dependencies
 ------------
 
