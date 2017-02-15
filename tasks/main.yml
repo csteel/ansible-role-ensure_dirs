@@ -19,11 +19,11 @@
 
 - name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
   debug: var='{{ ansible_ssh_user }}'
-  when: ansible_version.major < 2
+  when: "'{{ ansible_version.major }}' < 2"
 
 - name: "get value for {{ ansible_user }} ansible 2.0 >"
   debug: var='{{ ansible_user }}'
-  when: ansible_user is defined and ansible_version.major == 2 or ansible_version.major > 2
+  when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
 
 - name: ensure for remote directories
   file:
@@ -33,7 +33,7 @@
     group   : '{{ item.value.group   | default(omit) }}'
     mode    : '{{ item.value.mode    | default(omit) }}'
     recurse : '{{ item.value.recurse | default(omit) }}'
-  with_dict: ensure_dirs_on_remote
+  with_dict: '{{ ensure_dirs_on_remote }}'
 
 
 # Ensure for local directories on our Ansible controller
@@ -47,4 +47,4 @@
     group   : '{{ item.value.group   | default(omit) }}'
     mode    : '{{ item.value.mode    | default(omit) }}'
     recurse : '{{ item.value.recurse | default(omit) }}'
-  with_dict: ensure_dirs_on_local
+  with_dict: '{{ ensure_dirs_on_local }}'
