@@ -1,8 +1,10 @@
+
 ensure_dirs
 ===========
 
 
 The **ensure_dirs** role is used as a dependancy to ensure for the creation or removal of directories on the local and/or remote system(s). The role also allows for setting the directory(ies) owner(s), group(s) and permissions and can be used to recursivly ensure permissions.
+
 
 Usage Notes
 -----------
@@ -11,10 +13,12 @@ When using a relative paths for remote directories the directory is created in, 
 
 When using with a relative path on the local system, for example "test/test1", on the local system the director will be created in, or relative too, the directory in which the ansible-playbook command is run.
 
+
 Requirements
 ------------
 
 In most cases, except for perhaps testing, you would use this role as a dependancy for another role via that roles meta/main.yml **dependancies []** option by passing one dictionary for the remote directories and / or a dictionary for any local directories you want to manipulate.
+
 
 Role Variables
 --------------
@@ -37,16 +41,16 @@ In our example **remote_directory_one** serves as a placeholder for our director
     # The my_remote_directories var contains the description of all of the
     # remote directories you want to ensure for
     #
-
+    
     another_roles_remote_directories_description:
-
+    
     # Directory definition using minimal amount of directory vars
-
+    
       remote_directory_one:
     
         state   : "directory"
         path    : "dir_01"
-
+    
     # Example using all possible directory variables:
     
       remote_directory_two:
@@ -67,7 +71,7 @@ Note: In this example we have moved the dependencies variable to the top of the 
     ---
     # file: roles/dependant_role/meta/main.yml in dependant role
     dependencies:
-
+    
     - { role: ensure_dirs, 
             ensure_dirs_on_remote: "{{ another_roles_remote_directories_description }}",
             ensure_dirs_on_local : "{{ another_roles_local_directories_description }}"
@@ -117,6 +121,7 @@ directories we want on the local system where Ansible is being run.
         group       : "{{ ansible_ssh_user }}"
         mode        : "0644"
 
+
 Realworld Example
 -----------------
 
@@ -125,7 +130,7 @@ Realworld Example
 ---
 # file: roles/shorewall/meta/main.yml
 dependencies:
-  - { role: ensure_dirs, 
+-   { role: ensure_dirs, 
         ensure_dirs_on_remote: "{{ shorewall_ensure_dirs_on_remote }}",
         ensure_dirs_on_local : "{{ shorewall_ensure_dirs_on_local }}"
     }
@@ -133,7 +138,7 @@ dependencies:
 
 ### roles/shorewall/defaults/main.yml
 
-```yaml
+​```yaml
 ---
 # file: roles/shorewall/defaults/main.yml
 
@@ -160,22 +165,33 @@ shorewall_ensure_dirs_on_local:
     mode        : '0755'
 ```
 
+
 Dependencies
 ------------
 
 None, **ensure_dirs** is normally used as a dependancy for other roles that require directory manipulations.
+
 
 Example Playbook
 ----------------
 
 Under most circumstance this role does not require it's own playbook.
 
-License
--------
+
+## License
+
 MIT
 
-Author Information
-------------------
+## Author Information
 
 Christopher Steel
-christopher DOT steel AT mcgill DOT ca
+Systems Administrator
+McGill Centre for Integrative Neuroscience
+Montreal Neurological Institute
+McGill University
+3801 University Street
+Montréal, QC, Canada H3A 2B4
+Tel. No. +1 514 398-2494
+E-mail: christopherDOTsteel@mcgill.ca
+[MCIN](http://mcin-cnim.ca/), [theneuro.ca](http://theneuro.ca)
+
