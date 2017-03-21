@@ -25,6 +25,10 @@
   debug: var='{{ ansible_user }}'
   when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
 
+- name: "echo"
+  shell: echo '{{ item.value.state }}'
+  with_dict: '{{ ensure_dirs_on_remote }}'
+
 - name: ensure for remote directories
   file:
     state   : '{{ item.value.state   | default("directory") }}'
