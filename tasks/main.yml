@@ -17,19 +17,19 @@
 
 - debug: var=ansible_version.major
 
-- name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
-  debug: var='{{ ansible_ssh_user }}'
-  when: "'{{ ansible_version.major }}' < 2"
+#- name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
+#  debug: var='{{ ansible_ssh_user }}'
+#  when: "'{{ ansible_version.major }}' < 2"
 
-- name: "get value for {{ ansible_user }} ansible 2.0 >"
-  debug: var='{{ ansible_user }}'
-  when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
+#- name: "get value for {{ ansible_user }} ansible 2.0 >"
+#  debug: var='{{ ansible_user }}'
+#  when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
 
 - name: "echo"
   shell: echo '{{ item.value.state }}'
   with_dict: '{{ ensure_dirs_on_remote }}'
 
-- name: ensure for remote directories
+- name: "ensure for remote directories"
   file:
     state   : '{{ item.value.state   | default("directory") }}'
     path    : '{{ item.value.path    | default(mandatory) }}'
@@ -42,7 +42,7 @@
 
 # Ensure for local directories on our Ansible controller
 
-- name: ensure for local directories
+- name: "ensure for local directories"
   delegate_to: 127.0.0.1
   file:
     state   : '{{ item.value.state   | default("directory") }}'
