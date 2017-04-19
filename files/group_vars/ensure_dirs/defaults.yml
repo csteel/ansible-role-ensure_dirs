@@ -1,0 +1,6 @@
+---
+# file: group_vars/ensure_dirs/defaults.yml
+
+ensure_dirs_controller_user: 'bob'
+ensure_dirs_deployment_user: 'deploy'
+ensure_dirs_remote_user    : 'deploy'

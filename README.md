@@ -3,7 +3,7 @@ ensure_dirs
 ===========
 
 
-The **ensure_dirs** role is used as a dependancy to ensure for the creation or removal of directories on the local and/or remote system(s). The role also allows for setting the directory(ies) owner(s), group(s) and permissions and can be used to recursivly ensure permissions.
+The **ensure_dirs** role is used as a dependency to ensure for the creation or removal of directories on the local and/or remote system(s). The role also allows for setting the directory(ies) owner(s), group(s) and permissions and can be used to recursively ensure permissions.
 
 
 Usage Notes
@@ -28,13 +28,13 @@ Role Variables
     ensure_dirs_on_remote []
     ensure_dirs_on_local []
 
-The dependant role should create corresponding dictionary variables for one or both of the above variables. Generally these would be created in that roles **defaults** and/or **vars** directory.
+The dependent role should create corresponding dictionary variables for one or both of the above variables. Generally these would be created in that roles **defaults** and/or **vars** directory.
 
-For example, if you use the dependant roles default/main.yml you would describe the directories. In the example below the remote dictionary is called  **another_roles_remote_directories_description**. In **another_roles_remote_directories_description** you can describe as many directories as desired.
+For example, if you use the dependent roles default/main.yml you would describe the directories. In the example below the remote dictionary is called  **another_roles_remote_directories_description**. In **another_roles_remote_directories_description** you can describe as many directories as desired.
 
 At minimum each directory description must include a **name** and a **path**. If it is not specified, the **state** will be set to **directory**. Valid options for **state** are **"directory"** to ensure for the creation of a directory, or **"absent"** to ensure for the removal of a directory. See [Ansible - file - Sets attributes of files](http://docs.ansible.com/ansible/file_module.html) for all possible options.
 
-In our example **remote_directory_one** serves as a placeholder for our directory and **directory** the name and relative path of the directory. The placeholed **remote_directory_two** describes a directory using all the options currently supported for this role. 
+In our example **remote_directory_one** serves as a placeholder for our directory and **directory** the name and relative path of the directory. The place holder **remote_directory_two** describes a directory using all the options currently supported for this role. 
 
     # file: roles/dependant_role/defaults/main.yml
     #
@@ -62,9 +62,28 @@ In our example **remote_directory_one** serves as a placeholder for our director
         mode    : "0750"
         recurse : "true"
 
-### roles/dependant_role/meta/main.yml
+## group_vars/ensure_dirs/defaults.yml
 
-In the dependant roles meta/main.yml we add our dependency(ies) and pass the Python dictionary(ies) that define(s) our our local and/or remote directory(ies). It might look something like this:
+Create
+
+```shell
+cp roles/ensure_dirs/files/group_vars/ensure_dirs/defaults.yml group_vars/ensure_dirs/.
+```
+
+Content example
+
+```shell
+---
+# file: group_vars/ensure_dirs/defaults.yml
+
+ensure_dirs_controller_user: 'bob'
+ensure_dirs_deployment_user: 'deploy'
+ensure_dirs_remote_user    : 'deploy'
+```
+
+## roles/dependent_role/meta/main.yml
+
+In the dependent roles meta/main.yml we add our dependency(ies) and pass the Python dictionary(ies) that define(s) our our local and/or remote directory(ies). It might look something like this:
 
 Note: In this example we have moved the dependencies variable to the top of the roles meta/main.yml file so that it is readily noticed.
 
