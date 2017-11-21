@@ -19,7 +19,7 @@ boxes = [
 #    :ram => "256"
 #  },
   {
-    :name => "ubuntu-1604",
+    :name => "ubuntu1604",
     :box => "ubuntu/xenial64",
 #    :box => "bento/ubuntu-16.04",
     :ip => '10.0.0.13',
