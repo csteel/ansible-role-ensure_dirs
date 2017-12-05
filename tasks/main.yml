@@ -7,8 +7,13 @@
 
 # * [ansible playbook delegation](http://docs.ansible.com/ansible/playbooks_delegation.html#local-playbooks)
 
-
 ## tasks
+
+- name: pwd
+  command: pwd
+  register: pwd_output
+
+- debug: var=pwd_output
 
 # Ensure for remote directories on our target host(s)
 
@@ -17,16 +22,22 @@
 
 - debug: var=ansible_version.major
 
-- name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
-  debug: var='{{ ansible_ssh_user }}'
+#- name: "get value for {{ ansible_ssh_user }} ansible < 2.0"
+#  debug: var='{{ ansible_ssh_user }}'
 #  when: "'{{ ansible_version.major }}' < 2"
 
-#- name: "get value for {{ ansible_user }} ansible 2.0 >"
-#  debug: var='{{ ansible_user }}'
-#  when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
+- name: "get value for ansible_user ansible 2.0 >"
+  debug: var=ansible_user
+  when: "'{{ ansible_user }}' is defined and '{{ ansible_version.major }}' == 2 or '{{ ansible_version.major }}' > 2"
 
 - name: "debug value of ensure_dirs_on_remote"
-  debug: var='{{ ensure_dirs_on_remote }}'
+  debug: var=ensure_dirs_on_remote
+
+- name: "debug value of ensure_dirs_on_local"
+  debug: var=ensure_dirs_on_local
+
+- name: "debug value of ensure_dirs_on_local"
+  debug: var=ensure_dirs_deployment_user
 
 #- name: "check state of directories on remote"
 #  shell: echo '{{ item.value.state }}'

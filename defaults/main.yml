@@ -4,8 +4,8 @@
 # These values are for testing and get overidden by the values passed to
 # the role via a dependant roles **meta/main.yml** files **dependancy** section.
 
-ensure_dirs_controller_user: 'bob'
-ensure_dirs_deployment_user: 'deploy'
+ensure_dirs_controller_user: '{{ project_controller_user_name }}'
+ensure_dirs_deployment_user: '{{ project_deployment_user_name }}'
 ensure_dirs_remote_user    : '{{ ensure_dirs_deployment_user }}'
 
 ensure_dirs_default_remote_owner          : '{{ ensure_dirs_deployment_user }}'
